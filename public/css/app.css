@@ -12,6 +12,7 @@ html, body {
 
 body {
 	height: 50% !important;
+	text-decoration: none;
 }
 
 input[type=text], input[type=password] {

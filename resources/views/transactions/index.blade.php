@@ -46,9 +46,15 @@
                             @method('DELETE')
                             <button type="submit">Delete</button>
                         </form>
+
+                        
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <button>
+        <a href="{{ route('myadmin.index') }}">Back</a>
+    </button>
 @endsection

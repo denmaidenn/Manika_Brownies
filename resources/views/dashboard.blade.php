@@ -12,8 +12,8 @@
 </head>
 <body>
    <h1>Daftar Kue</h1>
-   Hello {{Auth::user()->username }}!
-   <table>
+   <b>Hello {{Auth::user()->username }}! </b>
+   <table border="2">
        <thead>
            <tr>
                <th>Nama Kue</th>
@@ -40,16 +40,32 @@
        </tbody>
    </table>
    <div>
-       <form method="POST" action="{{ route('logout') }} ">
+       
+
+       <div>
+            <div>
+                <form>
+                    <button class="btn btn-primary">Tambah Kue</button>
+                </form>
+                
+                <form>
+                    <button>Edit Kue</button>
+                </form>
+
+                <form></form>
+            </div>
+       </div>
+       
+   </div>
+
+   <form method="POST" action="{{ route('logout') }} ">
            @csrf   
            <div class="mb-3">
-               <button class="btn btn-primary" >
+               <button class="btn btn-danger" >
                    Logout
                </button>
            </div>
-       </form>
-       
-   </div>
+    </form>
    
 </body>
 </html>

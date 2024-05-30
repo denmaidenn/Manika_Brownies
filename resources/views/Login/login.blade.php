@@ -29,7 +29,7 @@
                 	</div>
 
                     <div class="loginButton">
-                        <button style="border-color: green;">Log in</button>
+                        <button style="color: green;">Log in</button>
                     </div>
                 	
                 </div>

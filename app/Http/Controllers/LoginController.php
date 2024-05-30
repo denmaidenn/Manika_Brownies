@@ -23,7 +23,7 @@ class LoginController extends Controller
         if(Auth::attempt(['username' => $request->username , 'password' => $request->password])) {
             $request->session()->regenerate();
 
-            return redirect()->route('dashboard');
+            return redirect()->route('myadmin.index');
 
         }
         return back()->withErrors('password', 'Wrong username or password!');
