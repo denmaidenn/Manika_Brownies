@@ -13,8 +13,9 @@ return new class extends Migration
             $table->string('kode_kue')->primary();
             $table->string('nama_kue');
             $table->text('deskripsi');
-            $table->integer('harga_kue', 8);
+            $table->integer('harga_kue');
             $table->string('gambar_kue')->nullable();
+            $table->boolean('status_bs')->default(false);
             $table->timestamps();
         });
     }

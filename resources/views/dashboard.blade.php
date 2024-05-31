@@ -45,7 +45,7 @@
        <div>
             <div>
                 <form>
-                    <button class="btn btn-primary">Tambah Kue</button>
+                    <button>Tambah Kue</button>
                 </form>
                 
                 <form>
@@ -58,14 +58,13 @@
        
    </div>
 
-   <form method="POST" action="{{ route('logout') }} ">
-           @csrf   
-           <div class="mb-3">
-               <button class="btn btn-danger" >
-                   Logout
-               </button>
-           </div>
-    </form>
+   <div>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button>Logout</button>
+        </form>
+   </div>
+   
    
 </body>
 </html>

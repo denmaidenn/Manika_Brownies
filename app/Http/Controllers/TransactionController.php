@@ -81,4 +81,14 @@ class TransactionController extends Controller
         $transaction->delete();
         return redirect()->route('transactions.index')->with('success', 'Transaksi berhasil dihapus.');
     }
+
+    public function sales()
+    {
+        $transactions = Transaction::select('nama_pembeli', 'nomor_telepon', 'alamat', 'kode_kue', 'jumlah_kue', 'created_at')
+            ->orderBy('created_at')
+            ->get()
+            ->groupBy('nama_pembeli');
+
+        return view('sales.index', compact('transactions'));
+    }
 }

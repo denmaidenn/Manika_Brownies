@@ -9,7 +9,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $bestSellers = Product::where('status_bs', true)->get();
         $products = Product::all();
-        return view('dashboard', compact('products'));
+        return view('dashboard', compact('bestSellers', 'products'));
     }
+
+
 }

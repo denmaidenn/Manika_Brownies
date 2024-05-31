@@ -2,14 +2,27 @@
 
 @section('content')
 
+
     <div>
         <div class="title-div">
             <h1>Daftar Kue</h1>
         </div>
 
         <div class="fitur-div">
-            <a href="{{ route('myadmin.create') }}">Tambah Kue</a>
+            <button >
+                <a href="{{ route('myadmin.create') }}">Tambah Kue</a>
+            </button>
+            <button>
+                <a  href="{{ route('sales.index') }}">Sales</a>
+            </button>
+            <button >
+                <a href="{{ route('transactions.index') }}">Transaction</a>
+            </button>
+            <button >
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+            </button>
         </div>
+        
 
         <div>
             <table>
@@ -50,21 +63,51 @@
             </table>
         </div>
     </div>
-    
-    
 
-    <form method="POST" action="{{ route('logout') }} ">
+    <div class="logout">
+       <form method="POST" action="{{ route('logout') }} ">
            @csrf   
            <div class="mb-3">
                <button class="btn btn-danger" >
                    Logout
                </button>
            </div>
-    </form>
+       </form>
+    </div>
 
-        <div>
-            <button class="btn btn-primary">
-                <a href="{{ route('transactions.index') }}">transactions</a>
-            </button>
-        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkboxes = document.querySelectorAll('.bs-checkbox');
+            const maxChecks = 4;
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    const checkedCheckboxes = document.querySelectorAll('.bs-checkbox:checked');
+                    if (checkedCheckboxes.length > maxChecks) {
+                        this.checked = false;
+                        alert('Maksimal hanya 4 kue yang dapat dijadikan Best Seller.');
+                    } else {
+                        const id = this.getAttribute('data-id');
+                        const status = this.checked;
+
+                        fetch(`/myadmin/${id}/set-bs`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({ status })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (!data.success) {
+                                this.checked = !status;
+                                alert(data.message);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

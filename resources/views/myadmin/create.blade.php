@@ -32,5 +32,14 @@
             <input type="file" name="gambar_kue" id="gambar_kue">
         </div>
         <button type="submit">Simpan</button>
+
+        <div>
+            <button>
+                <a href="{{ route('myadmin.index') }}">Back</a>
+            </button>
+        </div>
+        
     </form>
+
+
 @endsection

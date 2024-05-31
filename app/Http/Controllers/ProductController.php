@@ -11,15 +11,14 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-
         $originalOrder = Product::pluck('kode_kue')->toArray();
 
-    $products = Product::orderBy('kode_kue')->get();
+        $products = Product::orderBy('kode_kue')->get();
 
-    foreach ($products as $product) {
-        $newOrder = array_search($product->id, $originalOrder);
-        $product->update(['order' => $newOrder]);
-    }
+        foreach ($products as $product) {
+            $newOrder = array_search($product->id, $originalOrder);
+            $product->update(['order' => $newOrder]);
+        }
         return view('myadmin.index', compact('products'));
     }
 
@@ -83,5 +82,22 @@ class ProductController extends Controller
         }
         $product->delete();
         return redirect()->route('myadmin.index');
+    }
+
+    public function setBestSeller(Request $request, $kode_kue)
+    {
+        $product = Product::findOrFail($kode_kue);
+        $status = $request->input('status');
+
+        if (Product::where('status_bs', true)->count() >= 4 && $status) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Maksimal hanya 4 kue yang dapat dijadikan Best Seller.'
+            ]);
+        }
+
+        $product->update(['status_bs' => $status]);
+
+        return response()->json(['success' => true]);
     }
 }
