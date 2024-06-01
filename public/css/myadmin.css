@@ -3,3 +3,169 @@
     margin-bottom: 5%;
 }
 
+a {
+    color: black;
+    text-decoration: none;
+}
+
+* {
+    font-family: Poppins;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.title-div h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.fitur-div {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.styled-button, .styled-button-delete, .styled-button-logout {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.styled-button:hover, .styled-button-delete:hover, .styled-button-logout:hover {
+    background-color: #45a049;
+}
+
+.styled-button a, .styled-button-delete a, .styled-button-logout a {
+    color: white;
+    text-decoration: none;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: left;
+    overflow-x: auto;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+.styled-table thead tr {
+    background-color: #4CAF50;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #4CAF50;
+}
+
+.aksi-div {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.action-link {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.action-link:hover {
+    background-color: #45a049;
+}
+
+.logout {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .fitur-div {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .aksi-div {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .styled-button, .styled-button-delete, .styled-button-logout {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .styled-table th, .styled-table td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .title-div h1 {
+        font-size: 24px;
+    }
+
+    .fitur-div {
+        gap: 5px;
+    }
+
+    .styled-button, .styled-button-delete, .styled-button-logout {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .styled-table {
+        font-size: 14px;
+    }
+
+    .styled-table th, .styled-table td {
+        padding: 6px;
+    }
+}

@@ -1,6 +1,8 @@
 @extends('layout')
 
 @section('content')
+
+<link rel="stylesheet" href="{{ url ('css/myadmin_create.css') }}">
     <h1>Tambah Kue</h1>
 
     @if ($errors->any())

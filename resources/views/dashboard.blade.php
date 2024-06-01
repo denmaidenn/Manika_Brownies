@@ -2,15 +2,7 @@
 
 @section('content')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Dashboard</title>
-   
-</head>
-<body>
+
    <h1>Daftar Kue</h1>
    <b>Hello {{Auth::user()->username }}! </b>
    <table border="2">
@@ -44,15 +36,9 @@
 
        <div>
             <div>
-                <form>
-                    <button>Tambah Kue</button>
-                </form>
-                
-                <form>
-                    <button>Edit Kue</button>
-                </form>
-
-                <form></form>
+                <button >
+                   <a href="{{ route('myadmin.index')}}">Admin</a>
+                </button>
             </div>
        </div>
        

@@ -2,30 +2,28 @@
 
 @section('content')
 
-
-    <div>
+    <div class="container">
         <div class="title-div">
             <h1>Daftar Kue</h1>
         </div>
 
         <div class="fitur-div">
-            <button >
+            <button class="styled-button">
                 <a href="{{ route('myadmin.create') }}">Tambah Kue</a>
             </button>
-            <button>
-                <a  href="{{ route('sales.index') }}">Sales</a>
+            <button class="styled-button">
+                <a href="{{ route('sales.index') }}">Sales</a>
             </button>
-            <button >
+            <button class="styled-button">
                 <a href="{{ route('transactions.index') }}">Transaction</a>
             </button>
-            <button >
+            <button class="styled-button">
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </button>
         </div>
-        
 
         <div>
-            <table>
+            <table class="styled-table">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -48,14 +46,13 @@
                         <td>{{ $manika->created_at->format('d-m-Y') }}</td>
                         <td>
                             <div class="aksi-div">
-                                <a href="{{ route('myadmin.edit', $manika->kode_kue) }}">Edit</a>
+                                <a class="action-link" href="{{ route('myadmin.edit', $manika->kode_kue) }}">Edit</a>
                                 <form action="{{ route('myadmin.destroy', $manika->kode_kue) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit">Hapus</button>
+                                    <button type="submit" class="styled-button-delete">Hapus</button>
                                 </form>
                             </div>
-                            
                         </td>
                     </tr>
                 @endforeach
@@ -65,10 +62,10 @@
     </div>
 
     <div class="logout">
-       <form method="POST" action="{{ route('logout') }} ">
+       <form method="POST" action="{{ route('logout') }}">
            @csrf   
            <div class="mb-3">
-               <button class="btn btn-danger" >
+               <button class="styled-button-logout">
                    Logout
                </button>
            </div>

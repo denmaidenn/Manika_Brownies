@@ -1,8 +1,10 @@
 @extends('layout')
 
 @section('content')
+
+
     <h1>Daftar Penjualan</h1>
-    <table>
+    <table class="styled-table">
         <thead>
             <tr>
                 <th>No</th>
@@ -24,7 +26,7 @@
                     <td>{{ $group->first()->kode_kue }}</td>
                     <td>{{ $group->sum('jumlah_kue') }}</td>
                     <td>
-                        <button onclick="openModal('{{ $key }}')">Detail Penjualan</button>
+                        <button class="styled-button" onclick="openModal('{{ $key }}')">Detail Penjualan</button>
                     </td>
                 </tr>
             @endforeach
@@ -32,8 +34,8 @@
     </table>
 
     <div>
-        <button >
-            <a href="{{ route('myadmin.index') }}">Back</a>
+        <button class="styled-button">
+            <a href="{{ route('myadmin.index') }}" class="button-link">Back</a>
         </button>
     </div>
 

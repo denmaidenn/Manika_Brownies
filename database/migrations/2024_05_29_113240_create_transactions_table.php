@@ -12,7 +12,7 @@ return new class extends Migration
             $table->string('kode_transaksi')->primary();
             $table->string('kode_kue');
             $table->string('nama_pembeli');
-            $table->integer('nomor_telepon');
+            $table->string('nomor_telepon');
             $table->string('alamat');
             $table->string('catatan');
             $table->integer('jumlah_kue');

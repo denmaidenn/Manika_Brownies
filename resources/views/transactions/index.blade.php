@@ -2,7 +2,9 @@
 
 @section('content')
     <h1>Daftar Transaksi</h1>
-    <a href="{{ route('transactions.create') }}">Tambah Transaksi</a>
+    <button>
+       <a href="{{ route('transactions.create') }}">Tambah Transaksi</a>
+    </button>
     <form action="{{ route('transactions.index') }}" method="GET">
         @csrf
         <label for="tanggal">Pilih Tanggal:</label>

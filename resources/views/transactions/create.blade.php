@@ -1,10 +1,21 @@
 @extends('layout')
 
 @section('content')
-    <h1>Tambah Transaksi</h1>
+
+<link rel="stylesheet" href="{{ url('css/transaction.css') }}">
+<div class="container">
+
+    <div class="header-div">
+        <h1 id="title-div">Tambah Transaksi</h1>
+
+        <button id="button-div">
+            <a href="{{ route('transactions.index')}}">Back</a>
+        </button>
+    </div>
+    
 
     @if ($errors->any())
-        <div>
+        <div id="error-list">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -48,97 +59,77 @@
         </div>
         <button type="button" id="tambah-kue">Tambah Kue</button>
         <button type="submit">Simpan</button>
-        
     </form>
+</div>
 
-    
+<script>
+    document.getElementById('tambah-kue').addEventListener('click', function() {
+        var kueFields = document.getElementById('kue-fields');
+        var nextIndex = kueFields.querySelectorAll('.kue-field').length + 1;
 
-    <script>
-        document.getElementById('tambah-kue').addEventListener('click', function() {
-            var kueFields = document.getElementById('kue-fields');
-            var nextIndex = kueFields.querySelectorAll('.kue-field').length + 1;
+        var newKueField = document.createElement('div');
+        newKueField.classList.add('kue-field');
 
-            var newKueField = document.createElement('div');
-            newKueField.classList.add('kue-field');
+        var kodeKueLabel = document.createElement('label');
+        kodeKueLabel.setAttribute('for', 'kode_kue_' + nextIndex);
+        kodeKueLabel.textContent = 'Kode Kue:';
+        newKueField.appendChild(kodeKueLabel);
 
-            var kodeKueLabel = document.createElement('label');
-            kodeKueLabel.setAttribute('for', 'kode_kue_' + nextIndex);
-            kodeKueLabel.textContent = 'Kode Kue:';
-            newKueField.appendChild(kodeKueLabel);
+        var selectKue = document.createElement('select');
+        selectKue.setAttribute('name', 'kode_kue[]');
+        selectKue.setAttribute('id', 'kode_kue_' + nextIndex);
+        selectKue.setAttribute('data-index', nextIndex);
+        selectKue.classList.add('kode-kue');
+        selectKue.setAttribute('required', 'required');
+        selectKue.addEventListener('change', updateTotalHarga);
+        @foreach ($products as $product)
+            var optionKue{{ $loop->index }} = document.createElement('option');
+            optionKue{{ $loop->index }}.setAttribute('value', '{{ $product->kode_kue }}');
+            optionKue{{ $loop->index }}.setAttribute('data-harga', '{{ $product->harga_kue }}');
+            optionKue{{ $loop->index }}.textContent = '{{ $product->nama_kue }}';
+            selectKue.appendChild(optionKue{{ $loop->index }});
+        @endforeach
+        newKueField.appendChild(selectKue);
 
-            var selectKue = document.createElement('select');
-            selectKue.setAttribute('name', 'kode_kue[]');
-            selectKue.setAttribute('id', 'kode_kue_' + nextIndex);
-            selectKue.setAttribute('data-index', nextIndex);
-            selectKue.classList.add('kode-kue');
-            selectKue.setAttribute('required', 'required');
-            selectKue.addEventListener('change', updateTotalHarga);
-            @foreach ($products as $product)
-                var optionKue{{ $loop->index }} = document.createElement('option');
-                optionKue{{ $loop->index }}.setAttribute('value', '{{ $product->kode_kue }}');
-                optionKue{{ $loop->index }}.setAttribute('data-harga', '{{ $product->harga_kue }}');
-                optionKue{{ $loop->index }}.textContent = '{{ $product->nama_kue }}';
-                selectKue.appendChild(optionKue{{ $loop->index }});
-            @endforeach
-            newKueField.appendChild(selectKue);
+        var jumlahKueLabel = document.createElement('label');
+        jumlahKueLabel.setAttribute('for', 'jumlah_kue_' + nextIndex);
+        jumlahKueLabel.textContent = 'Jumlah Kue:';
+        newKueField.appendChild(jumlahKueLabel);
 
-            var jumlahKueLabel = document.createElement('label');
-            jumlahKueLabel.setAttribute('for', 'jumlah_kue_' + nextIndex);
-            jumlahKueLabel.textContent = 'Jumlah Kue:';
-            newKueField.appendChild(jumlahKueLabel);
+        var inputJumlahKue = document.createElement('input');
+        inputJumlahKue.setAttribute('type', 'number');
+        inputJumlahKue.setAttribute('name', 'jumlah_kue[]');
+        inputJumlahKue.setAttribute('id', 'jumlah_kue_' + nextIndex);
+        inputJumlahKue.setAttribute('data-index', nextIndex);
+        inputJumlahKue.classList.add('jumlah-kue');
+        inputJumlahKue.setAttribute('required', 'required');
+        inputJumlahKue.addEventListener('input', updateTotalHarga);
+        newKueField.appendChild(inputJumlahKue);
 
-            var inputJumlahKue = document.createElement('input');
-            inputJumlahKue.setAttribute('type', 'number');
-            inputJumlahKue.setAttribute('name', 'jumlah_kue[]');
-            inputJumlahKue.setAttribute('id', 'jumlah_kue_' + nextIndex);
-            inputJumlahKue.setAttribute('data-index', nextIndex);
-            inputJumlahKue.classList.add('jumlah-kue');
-            inputJumlahKue.setAttribute('required', 'required');
-            inputJumlahKue.addEventListener('input', updateTotalHarga);
-            newKueField.appendChild(inputJumlahKue);
+        var totalHargaLabel = document.createElement('label');
+        totalHargaLabel.setAttribute('for', 'total_harga_' + nextIndex);
+        totalHargaLabel.textContent = 'Total Harga:';
+        newKueField.appendChild(totalHargaLabel);
 
-            var totalHargaLabel = document.createElement('label');
-            totalHargaLabel.setAttribute('for', 'total_harga_' + nextIndex);
-            totalHargaLabel.textContent = 'Total Harga:';
-            newKueField.appendChild(totalHargaLabel);
+        var inputTotalHarga = document.createElement('input');
+        inputTotalHarga.setAttribute('type', 'text');
+        inputTotalHarga.setAttribute('name', 'total_harga[]');
+        inputTotalHarga.setAttribute('id', 'total_harga_' + nextIndex);
+        inputTotalHarga.classList.add('total-harga');
+        inputTotalHarga.setAttribute('readonly', 'readonly');
+        newKueField.appendChild(inputTotalHarga);
 
-            var inputTotalHarga = document.createElement('input');
-            inputTotalHarga.setAttribute('type', 'text');
-            inputTotalHarga.setAttribute('name', 'total_harga[]');
-            inputTotalHarga.setAttribute('id', 'total_harga_' + nextIndex);
-            inputTotalHarga.classList.add('total-harga');
-            inputTotalHarga.setAttribute('readonly', 'readonly');
-            newKueField.appendChild(inputTotalHarga);
+        kueFields.appendChild(newKueField);
+    });
 
-            kueFields.appendChild(newKueField);
-        });
+    function updateTotalHarga(event) {
+        var index = event.target.getAttribute('data-index');
+        var selectKue = document.getElementById('kode_kue_' + index);
+        var jumlahKue = document.getElementById('jumlah_kue_' + index);
+        var totalHarga = document.getElementById('total_harga_' + index);
 
-        function updateTotalHarga(event) {
-            var index = event.target.getAttribute('data-index');
-            var selectKue = document.getElementById('kode_kue_' + index);
-            var jumlahKue = document.getElementById('jumlah_kue_' + index);
-            var totalHarga = document.getElementById('total_harga_' + index);
+        var hargaKue = selectKue.options[selectKue.selectedIndex].getAttribute('data-harga');
+        var jumlah = jumlahKue.value;
 
-            var hargaKue = selectKue.options[selectKue.selectedIndex].getAttribute('data-harga');
-            var jumlah = jumlahKue.value;
-
-            if (hargaKue && jumlah) {
-                totalHarga.value = hargaKue * jumlah;
-            } else {
-                totalHarga.value = 0;
-            }
-        }
-
-        document.addEventListener('input', function(event) {
-            if (event.target.classList.contains('jumlah-kue')) {
-                updateTotalHarga(event);
-            }
-        });
-
-        document.addEventListener('change', function(event) {
-            if (event.target.classList.contains('kode-kue')) {
-                updateTotalHarga(event);
-            }
-        });
-    </script>
-@endsection
+        if (hargaKue && jumlah) {
+            totalHarga.value = hargaK
